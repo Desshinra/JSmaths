@@ -1,15 +1,18 @@
-function isPair(list) {
+const PlatziMath = {}
 
+PlatziMath.Pair = function isPair(number) {
+    if(number % 2 == 0 && number != 0) {
+        return 'Is pair'
+    }
 }
 
-// for(let i = 1; i <= 100; i++) {
-//     if(i % 2 == 0) {
-//         console.log(`${i} is pair`);
-//     } else {
-//         console.log(`${i} is odd`);
-//     }
-// }
-function calculteAverage(list) {
+PlatziMath.Odd = function isOdd(number) {
+    if(number % 2 > 0 && number != 0) {
+        return 'Is odd'
+    }
+}
+
+PlatziMath.average = function calculteAverage(list) {
     const plusAllElementsReduced = list.reduce((accumulatedValue, newValue) => accumulatedValue + newValue);
     const average = plusAllElementsReduced / list.length;
     
@@ -17,8 +20,29 @@ function calculteAverage(list) {
     return average;
 }
 
+PlatziMath.median = function calculateMedian(unorderedList) {
+    const lista = PlatziMath.ordered(unorderedList);
+    const listaEsPar = PlatziMath.Pair(lista);
+  
+    if (listaEsPar) {
+      const indexMitad1ListaPar = (lista.length / 2) - 1;
+      const indexMitad2ListaPar = lista.length / 2;
+      const listaMitades = [];
+      listaMitades.push(lista[indexMitad1ListaPar]);
+      listaMitades.push(lista[indexMitad2ListaPar]);
+  
+      const medianaListaPar = PlatziMath.average(listaMitades);
+      return medianaListaPar;
+    } else {
+      const indexMitadListaImpar = Math.floor(lista.length / 2);
+      const medianaListaImpar = lista[indexMitadListaImpar];
+      console.log(indexMitadListaImpar);
+      console.log(medianaListaImpar);
+      return medianaListaImpar;
+    }
+  }
 
-const calculateMode = list => {
+PlatziMath.mode = function calculateMode(list){
     const countList = {};
 
     for (let i = 0; i < list.length; i++) {
@@ -40,14 +64,12 @@ const calculateMode = list => {
     return mode;
 }
 
-
-const orderedList = unorderedList => {
+PlatziMath.ordered = function orderedList(unorderedList){
     const list = unorderedList.sort((accumulatedValue, newValue) => accumulatedValue - newValue);
     return list;
 }
 
-
-const orderedBidimensionalList = (unorderedBidimensionalList, i) => {
+PlatziMath.bidimensional = function orderedBidimensionalList(unorderedBidimensionalList, i){
     const list = unorderedBidimensionalList.sort((accumulatedValue, newValue) => accumulatedValue[i] - newValue[i]);
     return list;
 }
